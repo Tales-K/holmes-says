@@ -51,7 +51,7 @@ function App() {
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo-instruct",
+          model: "gpt-4o",
           prompt: `Resuma o seguinte texto em ${
             language === "pt" ? "português" : "inglês"
           }:\n${item.text}`,
@@ -232,7 +232,7 @@ function App() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
             <img
               src={logo}
-              alt="Homes Says Logo"
+              alt="Holmes Says Logo"
               style={{
                 height: 48,
                 width: 48,
@@ -248,7 +248,7 @@ function App() {
                 fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
               }}
             >
-              Homes Says
+              Holmes Says
             </Typography>
           </Box>
           <FormControl fullWidth sx={{ mb: 2 }}>

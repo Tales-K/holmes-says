@@ -1,16 +1,62 @@
-# React + Vite
+# Holmes Says
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Site](https://tales-k.github.io/holmes-says/)
 
-Currently, two official plugins are available:
+> A modern, glassmorphism React app for transcribing and summarizing audio using OpenAI Whisper, with persistent history and GitHub Pages deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Audio Transcription:** Upload MP3 or OGG files and transcribe them using OpenAI Whisper API.
+- **Summarization:** Summarize transcriptions or history items using OpenAI GPT-4o.
+- **API Key Management:** Enter and persist your OpenAI API key securely in local storage.
+- **History:** All transcriptions and summaries are saved in local storage for future access.
+- **Download:** Download any transcription as a text file.
+- **Language Switcher:** Toggle between Portuguese (pt-BR) and English (EN) for UI and summarization.
+- **Modern UI:** Responsive, dark-themed glassmorphism interface using MUI and custom CSS.
+- **GitHub Pages Deployment:** Automatic deployment via GitHub Actions.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How It Works
 
-## Expanding the ESLint configuration
+1. **Enter your OpenAI API key** ([create one here](https://platform.openai.com/account/api-keys)).
+2. **Upload an audio file** (MP3 or OGG).
+3. **Transcribe:** The app sends the file to OpenAI Whisper and displays the transcription.
+4. **Summarize:** Click to summarize the transcription or any history item using GPT-4o.
+5. **Download:** Save any transcription as a `.txt` file.
+6. **History:** All transcriptions and summaries are saved locally and shown in the history panel.
+7. **Language:** Switch between Portuguese and English for UI and summary output.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- React 19
+- Vite
+- Material UI (MUI)
+- FontAwesome
+- react-dropzone
+- file-saver
+- OpenAI API (Whisper, GPT-4o)
+- GitHub Actions & Pages
+
+## Deployment
+
+The site is automatically deployed to GitHub Pages on every push to `main` using [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages).
+
+- **URL:** [https://Tales-K.github.io/holmes-says](https://Tales-K.github.io/holmes-says)
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build & Deploy
+
+```bash
+npm run build
+# Output in dist/
+```
+Push to `main` to trigger GitHub Actions deployment.
+
+## License
+
+MIT
