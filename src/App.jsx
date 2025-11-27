@@ -91,14 +91,17 @@ function App() {
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_KEY);
     if (saved) setHistory(JSON.parse(saved));
-    const savedSummaries = localStorage.getItem('transcription_summaries');
+    const savedSummaries = localStorage.getItem("transcription_summaries");
     if (savedSummaries) setHistorySummaries(JSON.parse(savedSummaries));
   }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem(LOCAL_KEY, JSON.stringify(history));
-      localStorage.setItem('transcription_summaries', JSON.stringify(historySummaries));
+      localStorage.setItem(
+        "transcription_summaries",
+        JSON.stringify(historySummaries)
+      );
     } catch (e) {
       // fallback: do nothing
     }
