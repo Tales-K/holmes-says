@@ -91,15 +91,18 @@ function App() {
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_KEY);
     if (saved) setHistory(JSON.parse(saved));
+    const savedSummaries = localStorage.getItem('transcription_summaries');
+    if (savedSummaries) setHistorySummaries(JSON.parse(savedSummaries));
   }, []);
 
   useEffect(() => {
     try {
       localStorage.setItem(LOCAL_KEY, JSON.stringify(history));
+      localStorage.setItem('transcription_summaries', JSON.stringify(historySummaries));
     } catch (e) {
       // fallback: do nothing
     }
-  }, [history]);
+  }, [history, historySummaries]);
 
   const onDrop = (acceptedFiles) => {
     if (acceptedFiles.length) setAudioFile(acceptedFiles[0]);
@@ -173,41 +176,6 @@ function App() {
       message: "Transcrição removida!",
       severity: "info",
     });
-  };
-
-  const handleDownload = () => {
-    if (!transcription) return;
-    const blob = new Blob([transcription], {
-      type: "text/plain;charset=utf-8",
-    });
-    saveAs(blob, `${audioFile?.name || "transcription"}.txt`);
-  };
-
-  const handleSummarize = async () => {
-    if (!transcription || !apiKey) return;
-    setLoading(true);
-    try {
-      const response = await fetch("https://api.openai.com/v1/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo-instruct",
-          prompt: `Resuma o seguinte texto em ${
-            language === "pt" ? "português" : "inglês"
-          }:\n${transcription}`,
-          max_tokens: 200,
-        }),
-      });
-      if (!response.ok) throw new Error("API error");
-      const data = await response.json();
-      setSummary(data.choices?.[0]?.text?.trim() || "");
-    } catch (e) {
-      setSummary("Erro ao resumir.");
-    }
-    setLoading(false);
   };
 
   return (
