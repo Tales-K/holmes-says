@@ -55,9 +55,9 @@ function App() {
           messages: [
             {
               role: "user",
-              content: `Resuma o seguinte texto em ${
+              content: `esse texto é uma transcrição de um áudio, resuma-o preservando a categoria gramatical (primeira, segunda ou terceira pessoa), traduzindo para ${
                 language === "pt" ? "português" : "inglês"
-              }:\n${item.text}`,
+              }. responda apenas a transcrição e nada mais, nem antes ou depois. evite repetições, seja sucinto sem ocultar ideias principais, remova detalhes desnecessarios, separe o texto em parágrafos. ${item.text}`,
             },
           ],
           max_tokens: 200,
