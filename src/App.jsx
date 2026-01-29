@@ -44,7 +44,7 @@ function App() {
     if (!item.text || !apiKey) return;
     setLoading(true);
     try {
-      const response = await fetch("https://api.openai.com/v1/completions", {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,9 +52,14 @@ function App() {
         },
         body: JSON.stringify({
           model: "gpt-4o",
-          prompt: `Resuma o seguinte texto em ${
-            language === "pt" ? "português" : "inglês"
-          }:\n${item.text}`,
+          messages: [
+            {
+              role: "user",
+              content: `Resuma o seguinte texto em ${
+                language === "pt" ? "português" : "inglês"
+              }:\n${item.text}`,
+            },
+          ],
           max_tokens: 200,
         }),
       });
@@ -62,7 +67,7 @@ function App() {
       const data = await response.json();
       setHistorySummaries((s) => ({
         ...s,
-        [item.file]: data.choices?.[0]?.text?.trim() || "",
+        [item.file]: data.choices?.[0]?.message?.content?.trim() || "",
       }));
     } catch (e) {
       setHistorySummaries((s) => ({ ...s, [item.file]: "Erro ao resumir." }));
